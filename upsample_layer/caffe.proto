@@ -1,0 +1,20 @@
+1.加入upsample层并编译Caffe
+
+upsample_layer.hpp放入include/caffe/layers下面；
+upsample_layer.cpp与upsample_layer.cu放在src/caffe/layers下面。
+
+修改相应的caffe.proto文件，src/caffe/proto/caffe.proto中的LayerParameter的最后一行加入加入：
+
+message LayerParameter {
+    .....
+    optional UpsampleParameter upsample_param = 149;
+}
+
+注意149为新层的ID号，该ID号请根据个人的caffe.proto文件指定即可。
+
+然后再caffe.proto中添加upsample层的参数：
+
+message UpsampleParameter{
+  optional int32 scale = 1 [default = 1];
+}
+
